@@ -1,0 +1,6 @@
+<DataBaseConfiguration>
+	<HibernateConfigFile>asd/hibernate.cfg.xml</HibernateConfigFile>
+	<DescriptionMappingFile>asd/Army.hbm.xml</DescriptionMappingFile>
+	<DescriptionClassName>asd.Army</DescriptionClassName>
+	
+</DataBaseConfiguration>

@@ -1,0 +1,6 @@
+<DataBaseConfiguration>
+	<HibernateConfigFile>src/hibernate.cfg.xml</HibernateConfigFile>
+	<DescriptionMappingFile>src/Army.hbm.xml</DescriptionMappingFile>
+	<DescriptionClassName>models.Army</DescriptionClassName>
+	
+</DataBaseConfiguration>

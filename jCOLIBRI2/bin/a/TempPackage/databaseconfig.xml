@@ -1,0 +1,6 @@
+<DataBaseConfiguration>
+	<HibernateConfigFile>a/hibernate.cfg.xml</HibernateConfigFile>
+	<DescriptionMappingFile>a/Miniature.hbm.xml</DescriptionMappingFile>
+	<DescriptionClassName>a.Miniature</DescriptionClassName>
+	
+</DataBaseConfiguration>

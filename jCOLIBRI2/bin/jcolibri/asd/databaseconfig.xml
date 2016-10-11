@@ -1,0 +1,5 @@
+<DataBaseConfiguration>
+	<HibernateConfigFile>jcolibri/asd/hibernate.cfg.xml</HibernateConfigFile>
+	<DescriptionMappingFile>jcolibri/asd/TestDescription.hbm.xml</DescriptionMappingFile>
+	<DescriptionClassName>jcolibri.asd.TestDescription</DescriptionClassName>
+</DataBaseConfiguration>

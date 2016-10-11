@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+
+<class name="models.Army" table="army">
+	<id name="caseId" column="caseId">
+	</id>
+	<property name="totalPointCost" column="totalPointCost"/>
+
+</class>
+
+<class name="models.Miniature" table="Miniature">
+
+	<id name="miniatureId" column="miniatureId">
+	  <generator class="native"/>
+	</id>
+	<property name="miniatureName" column="miniatureName"/>
+	<property name="miniatureType" column="miniatureType"/>
+	<property name="pointCost" column="pointCost"/>
+	<property name="spd" column="spd"/>
+	<property name="str" column="str"/>
+	<property name="mat" column="mat"/>
+	<property name="rat" column="rat"/>
+	<property name="def" column="def"/>
+	<property name="arm" column="arm"/>
+	<property name="cmd" column="cmd"/>
+	<property name="fieldAllowance" column="fieldAllowance"/>
+	<!-- <many-to-one name="Army" column="armyId" not-null="true" cascade="save-update"/> -->
+
+</class>
+
+<class name="models.Warcaster" table="warcaster">
+
+	<id name="miniatureId" column="miniatureId">
+	  <generator class="native"/>
+	</id>
+	<property name="focus" column="focus"/>
+	<property name="warcasterPoints" column="warcasterPoints"/>
+	<!-- <many-to-one name="Army" column="armyId" not-null="true" cascade="save-update"/> -->
+
+</class>
+
+</hibernate-mapping>
