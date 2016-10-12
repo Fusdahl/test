@@ -31,6 +31,7 @@ import jcolibri.exception.InitializingException;
 import jcolibri.util.FileIO;
 import jdk.nashorn.internal.parser.JSONParser;
 import models.Army;
+import models.BaseMiniature;
 import models.Miniature;
 import models.Score;
 import models.Solo;
@@ -39,6 +40,7 @@ import models.UnitAttachment;
 import models.Warcaster;
 import models.Warjack;
 import utility.JsonNameMatcher;
+import utility.MiniatureReader;
 
 /**
  * Implements a data base connector using the <a href="www.hibernate.org">Hibernate package</a>.
@@ -271,7 +273,7 @@ public class WarmachineDBConnector implements Connector {
 			Object[] obj = (Object[]) iter.next();
 			Integer miniatureId = Integer.parseInt(String.valueOf(obj[1]));
 			Integer miniatureCount = Integer.parseInt(String.valueOf(obj[2]));
-			Miniature currentMiniature = getMiniature(miniatureId);
+			BaseMiniature currentMiniature = getMiniature(miniatureId);
 			for(int i = 0; i < miniatureCount; ++i) {
 				army.addMiniature(castMiniature(currentMiniature));
 			}
@@ -281,41 +283,26 @@ public class WarmachineDBConnector implements Connector {
 	}
 	
 	// Parameter should be an enum
-	private Miniature castMiniature(Miniature miniature) {
+	private Miniature castMiniature(BaseMiniature miniature) {
 		Gson gson = new Gson();
 		
 		Miniature retVal = null;
 		try {
 			switch(miniature.getMiniatureType()) {
 			case 1: {
-				BufferedReader br = new BufferedReader(new FileReader(JSON_FILEPATH + "warcasters.json"));
-				Warcaster[] temp = gson.fromJson(br, Warcaster[].class);
-				retVal = JsonNameMatcher.findMatchingWarcaster(miniature, Arrays.asList(temp));
-				System.out.println(retVal.toString());
+				retVal = MiniatureReader.parseWarcaster(miniature.getMiniatureName());
 			} break;
 			case 2: {
-				BufferedReader br = new BufferedReader(new FileReader(JSON_FILEPATH + "warjacks.json"));
-				Warjack[] temp = gson.fromJson(br, Warjack[].class);
-				retVal = JsonNameMatcher.findMatchingWarjack(miniature, Arrays.asList(temp));
-				System.out.println(retVal.toString());
+				retVal = MiniatureReader.parseWarjack(miniature.getMiniatureName());
 			} break;
 			case 3: {
-				BufferedReader br = new BufferedReader(new FileReader(JSON_FILEPATH + "solos.json"));
-				Solo[] temp = gson.fromJson(br, Solo[].class);
-				retVal = JsonNameMatcher.findMatchingSolo(miniature, Arrays.asList(temp));
-				System.out.println(retVal.toString());
+				retVal = MiniatureReader.parseSolo(miniature.getMiniatureName());
 			} break;
 			case 4: {
-				BufferedReader br = new BufferedReader(new FileReader(JSON_FILEPATH + "units.json"));
-				Unit[] temp = gson.fromJson(br, Unit[].class);
-				retVal = JsonNameMatcher.findMatchingUnit(miniature, Arrays.asList(temp));
-				System.out.println(retVal.toString());
+				retVal = MiniatureReader.parseUnit(miniature.getMiniatureName());
 			} break;
 			case 5: {
-				BufferedReader br = new BufferedReader(new FileReader(JSON_FILEPATH + "attachments.json"));
-				UnitAttachment[] temp = gson.fromJson(br, UnitAttachment[].class);
-				retVal = JsonNameMatcher.findMatchingAttachment(miniature, Arrays.asList(temp));
-				System.out.println(retVal.toString());
+				retVal = MiniatureReader.parseAttachment(miniature.getMiniatureName());
 			} break;
 		}
 			
@@ -345,14 +332,13 @@ public class WarmachineDBConnector implements Connector {
 		}
 	}
 	
-	private Miniature getMiniature(int miniatureId) {
+	private BaseMiniature getMiniature(int miniatureId) {
 		Session session;// = sessionFactory.openSession();				
 		Transaction transaction; //= session.beginTransaction();
 		session = sessionFactory.openSession();	
 		transaction = session.beginTransaction();
-		List test = session.createSQLQuery("SELECT * FROM " + MINIATURE_TABLE + " WHERE miniatureId = " + miniatureId).addEntity(Miniature.class).list();
 		//Seems to call some kind of update of miniature for some reason.. WHY?
-		Miniature miniature = (Miniature) session.createSQLQuery("SELECT * FROM " + MINIATURE_TABLE + " WHERE miniatureId = " + miniatureId).addEntity(Miniature.class).list().get(0);
+		BaseMiniature miniature = (BaseMiniature) session.createSQLQuery("SELECT * FROM " + MINIATURE_TABLE + " WHERE miniatureId = " + miniatureId).addEntity(BaseMiniature.class).list().get(0);
 		//descList = session.createQuery("from "+ descriptionClassName).list();			
 		transaction.commit();
 		session.close();

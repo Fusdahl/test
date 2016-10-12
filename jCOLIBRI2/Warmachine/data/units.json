@@ -1,3 +1,5 @@
 [
-{"size":6,"miniatureId":0,"miniatureName":"atgm","miniatureType":0,"spd":0,"str":0,"mat":0,"rat":0,"def":0,"arm":0,"cmd":0,"fieldAllowance":0},
+{"size":6,"miniatureId":0,"miniatureName":"atgm","miniatureType":4,"spd":0,"str":0,"mat":0,"rat":0,"def":0,"arm":0,"cmd":0,"fieldAllowance":0},
+{"size":3,"miniatureId":0,"miniatureName":"min storm lances","miniatureType":4,"spd":8,"str":6,"mat":7,"rat":5,"def":13,"arm":17,"cmd":9,"fieldAllowance":2, "pointCost":12},
+{"size":5,"miniatureId":0,"miniatureName":"max storm lances","miniatureType":4,"spd":8,"str":6,"mat":7,"rat":5,"def":13,"arm":17,"cmd":9,"fieldAllowance":2, "pointCost":20}
 ]

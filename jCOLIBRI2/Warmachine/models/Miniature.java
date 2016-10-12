@@ -2,11 +2,7 @@ package models;
 
 import jcolibri.cbrcore.Attribute;
 
-public class Miniature implements jcolibri.cbrcore.CaseComponent {
-	int miniatureId;
-	String miniatureName;
-	//Expand this to an enum probably - Look at the tutorial
-	int miniatureType;
+public class Miniature extends BaseMiniature {
 	int pointCost;
 	int spd;
 	int str;
@@ -29,35 +25,7 @@ public class Miniature implements jcolibri.cbrcore.CaseComponent {
 		this.pointCost = pointCost;
 	}
 	
-	public int getMiniatureType() {
-		return miniatureType;
-	}
-
-	public void setMiniatureType(int miniatureType) {
-		this.miniatureType = miniatureType;
-	}
-	
-	public String getMiniatureName() {
-		return miniatureName.toLowerCase();
-	}
-
-	public void setMiniatureName(String miniatureName) {
-		this.miniatureName = miniatureName.toLowerCase();
-	}
-	
-	public int getMiniatureId() {
-		return miniatureId;
-	}
-
-	public void setMiniatureId(int miniatureId) {
-		this.miniatureId = miniatureId;
-	}
-	
 	public Miniature() {};
-	
-	public Attribute getIdAttribute() {
-		return new Attribute("caseId", this.getClass());
-	}
 	
 	public String toString() {
 		return "(name: " + miniatureName + "; pointCost: " + pointCost + "; spd: " + spd + "; str:" + str + "; mat:" + mat +"; rat:" + rat + "; def:" + def + "; arm:" + arm + "; cmd:" + cmd + "; FA:" + fieldAllowance + "; miniatureId: " + miniatureId +")"; 

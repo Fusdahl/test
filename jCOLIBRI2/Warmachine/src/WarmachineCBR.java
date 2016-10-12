@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import src.TestDBServer;
+import utility.QueryParser;
 import utility.UserInputHelper;
 import jcolibri.casebase.LinealCaseBase;
 import jcolibri.cbraplications.StandardCBRApplication;
@@ -156,11 +157,14 @@ public class WarmachineCBR implements StandardCBRApplication {
 	
 	public static void main(String[] args) {
 		WarmachineCBR recommender = getInstance();
+		QueryParser queryParser = new QueryParser();
 		try
 		{
 			recommender.configure();
 			recommender.preCycle();
-			recommender.cycle(null);
+			CBRQuery query = queryParser.parseQuery(1);
+			System.out.println("-----------------QUERY: " + query);
+			recommender.cycle(query);
 			
 			
 			boolean cont = true;

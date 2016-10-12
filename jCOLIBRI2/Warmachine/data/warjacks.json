@@ -1,4 +1,4 @@
 [
-{"miniatureId":0,"miniatureName":"ironclad","miniatureType":0,"spd":0,"str":0,"mat":0,"rat":0,"def":0,"arm":0,"cmd":0,"fieldAllowance":0},
-{"miniatureId":0,"miniatureName":"stormclad","miniatureType":0,"spd":0,"str":0,"mat":0,"rat":0,"def":0,"arm":0,"cmd":0,"fieldAllowance":0},
+{"miniatureId":20,"miniatureName":"ironclad","miniatureType":2,"spd":5,"str":11,"mat":6,"rat":6,"def":12,"arm":18,"cmd":0,"fieldAllowance":1000, "pointCost":12},
+{"miniatureId":21,"miniatureName":"stormclad","miniatureType":2,"spd":5,"str":11,"mat":7,"rat":6,"def":12,"arm":19,"cmd":0,"fieldAllowance":1000, "pointCost":18},
 ]

@@ -7,7 +7,7 @@ import jcolibri.cbrcore.Attribute;
 
 public class Army implements jcolibri.cbrcore.CaseComponent {
 	int caseId;
-	int totalPointCost;
+	int totalPointCost = 0;
 	ArrayList<Miniature> miniatures = new ArrayList<Miniature>();
 	ArrayList<Score> scores = new ArrayList<Score>();
 	
@@ -28,7 +28,9 @@ public class Army implements jcolibri.cbrcore.CaseComponent {
 	public String toString() {
 		String retVal = "(caseID: " + caseId + " ; armyCost:" + totalPointCost + " ; " + "miniatures: " + System.lineSeparator();
 		for(Miniature miniature : miniatures) {
-			retVal += "\t" + miniature.toString() + System.lineSeparator();
+			if(miniature != null) {
+				retVal += "\t" + miniature.toString() + System.lineSeparator();
+			}
 		}
 		return retVal;
 	}
@@ -43,6 +45,11 @@ public class Army implements jcolibri.cbrcore.CaseComponent {
 	
 	public void addMiniature(Miniature miniature) {
 		miniatures.add(miniature);
+		if(miniature instanceof Warcaster) {
+			totalPointCost -= ((Warcaster)miniature).getWarcasterPoints();
+		} else if(miniature != null){
+			totalPointCost += miniature.getPointCost();
+		}
 	}
 	
 	public void addScore(Score score) {
