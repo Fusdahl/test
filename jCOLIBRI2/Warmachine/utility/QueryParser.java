@@ -43,6 +43,15 @@ public class QueryParser {
 				case "unit": {
 					army.addMiniature(MiniatureReader.parseUnit(miniatureName));
 				} break;
+				case "unitAttachment": {
+					army.addMiniature(MiniatureReader.parseUnitAttachment(miniatureName));
+				} break;
+				case "juniorWarcaster": {
+					army.addMiniature(MiniatureReader.parseJuniorWarcaster(miniatureName));
+				} break;
+				case "warcasterAttachment": {
+					army.addMiniature(MiniatureReader.parseWarcasterAttachment(miniatureName));
+				} break;
 				default:
 					br.close();
 					throw new RuntimeException("Missed all switches when parsing query!");
@@ -56,6 +65,9 @@ public class QueryParser {
 			throw new RuntimeException("Crashed when parsing query number: " + queryNumber + " File not found: " + QUERY_FILEPATH + "query" + queryNumber + ".json" );
 		} catch(IOException e) {
 			throw new RuntimeException("Crashed when parsing query number: " + queryNumber + " IOException");
+		}
+		if(!ArmyValidator.validateArmy(army)) {
+			throw new RuntimeException("Invalid query - Army did not pass validation in query parser");
 		}
 		
 		return retVal;

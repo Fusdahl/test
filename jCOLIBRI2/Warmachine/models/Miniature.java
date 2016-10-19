@@ -12,6 +12,7 @@ public class Miniature extends BaseMiniature {
 	int arm;
 	int cmd;
 	int fieldAllowance;
+	int hp;
 	// ArrayList<Race> races;
 	// ArrayList<Ability> normalAbilities;
 	// ArrayList<Ability> specialAbilities;
@@ -30,6 +31,15 @@ public class Miniature extends BaseMiniature {
 	public String toString() {
 		return "(name: " + miniatureName + "; pointCost: " + pointCost + "; spd: " + spd + "; str:" + str + "; mat:" + mat +"; rat:" + rat + "; def:" + def + "; arm:" + arm + "; cmd:" + cmd + "; FA:" + fieldAllowance + "; miniatureId: " + miniatureId +")"; 
 	}
+	
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
 
 	public int getSpd() {
 		return spd;
@@ -108,6 +118,7 @@ public class Miniature extends BaseMiniature {
 		this.arm = miniature.getArm();
 		this.cmd = miniature.getCmd();
 		this.fieldAllowance = miniature.getFieldAllowance();
+		this.hp = miniature.getHp();
 	}
 	
 }

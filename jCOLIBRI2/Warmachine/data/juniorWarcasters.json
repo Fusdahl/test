@@ -1,0 +1,4 @@
+[
+{"focus":4,"miniatureId":70, "pointCost":4, "miniatureName":"jakes","miniatureType":7,"spd":6,"str":5,"mat":6,"rat":5,"def":15,"arm":13,"cmd":7,"fieldAllowance":1, "warcasterPoints":0, "hp":5},
+{"focus":3,"miniatureId":71, "pointCost":4, "miniatureName":"junior","miniatureType":7,"spd":6,"str":5,"mat":5,"rat":4,"def":14,"arm":14,"cmd":7,"fieldAllowance":1, "warcasterPoints":0, "hp":5}
+]

@@ -1,0 +1,6 @@
+[
+{"miniatureId":60,"miniatureName":"squire","miniatureType":6,"spd":6,"str":3,"mat":4,"rat":1,"def":13,"arm":14,"cmd":0,"fieldAllowance":1, "pointCost":5},
+{"miniatureId":61,"miniatureName":"madelyn","miniatureType":6,"spd":6,"str":4,"mat":4,"rat":4,"def":14,"arm":12,"cmd":7,"fieldAllowance":1, "pointCost":4},
+{"miniatureId":62,"miniatureName":"reinholdt","miniatureType":6,"spd":7,"str":2,"mat":2,"rat":2,"def":15,"arm":11,"cmd":4,"fieldAllowance":1, "pointCost":4},
+{"miniatureId":63,"miniatureName":"sylys","miniatureType":6,"spd":6,"str":4,"mat":5,"rat":4,"def":13,"arm":13,"cmd":5,"fieldAllowance":1, "pointCost":4}
+]

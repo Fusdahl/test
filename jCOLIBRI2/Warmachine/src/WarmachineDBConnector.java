@@ -272,11 +272,8 @@ public class WarmachineDBConnector implements Connector {
 		{
 			Object[] obj = (Object[]) iter.next();
 			Integer miniatureId = Integer.parseInt(String.valueOf(obj[1]));
-			Integer miniatureCount = Integer.parseInt(String.valueOf(obj[2]));
 			BaseMiniature currentMiniature = getMiniature(miniatureId);
-			for(int i = 0; i < miniatureCount; ++i) {
-				army.addMiniature(castMiniature(currentMiniature));
-			}
+			army.addMiniature(castMiniature(currentMiniature));
 			readScores(army);
 			System.out.println(army);
 		}
@@ -284,8 +281,6 @@ public class WarmachineDBConnector implements Connector {
 	
 	// Parameter should be an enum
 	private Miniature castMiniature(BaseMiniature miniature) {
-		Gson gson = new Gson();
-		
 		Miniature retVal = null;
 		try {
 			switch(miniature.getMiniatureType()) {
@@ -302,7 +297,13 @@ public class WarmachineDBConnector implements Connector {
 				retVal = MiniatureReader.parseUnit(miniature.getMiniatureName());
 			} break;
 			case 5: {
-				retVal = MiniatureReader.parseAttachment(miniature.getMiniatureName());
+				retVal = MiniatureReader.parseUnitAttachment(miniature.getMiniatureName());
+			} break;
+			case 6: {
+				retVal = MiniatureReader.parseWarcasterAttachment(miniature.getMiniatureName());
+			} break;
+			case 7: {
+				retVal = MiniatureReader.parseJuniorWarcaster(miniature.getMiniatureName());
 			} break;
 		}
 			
@@ -338,8 +339,13 @@ public class WarmachineDBConnector implements Connector {
 		session = sessionFactory.openSession();	
 		transaction = session.beginTransaction();
 		//Seems to call some kind of update of miniature for some reason.. WHY?
-		BaseMiniature miniature = (BaseMiniature) session.createSQLQuery("SELECT * FROM " + MINIATURE_TABLE + " WHERE miniatureId = " + miniatureId).addEntity(BaseMiniature.class).list().get(0);
-		//descList = session.createQuery("from "+ descriptionClassName).list();			
+		BaseMiniature miniature = null;
+		try {
+			miniature = (BaseMiniature) session.createSQLQuery("SELECT * FROM " + MINIATURE_TABLE + " WHERE miniatureId = " + miniatureId).addEntity(BaseMiniature.class).list().get(0);
+		} catch(NullPointerException e) {
+			throw new RuntimeException("Tried to access miniature in database with id: " + miniatureId + ". This ID does not exist in the database");
+		}
+
 		transaction.commit();
 		session.close();
 		return miniature;

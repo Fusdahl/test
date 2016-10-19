@@ -4,15 +4,21 @@ import java.util.ArrayList;
 
 import jcolibri.cbrcore.CBRCase;
 import jcolibri.cbrcore.CBRCaseBase;
+import jcolibri.cbrcore.CBRQuery;
 import models.Army;
 import models.Race;
+import models.Warcaster;
 
 public class Retrieval {
 	
 	CBRCaseBase caseBase;
+	CBRQuery query;
+	Army queryArmy;
 	
-	public Retrieval(CBRCaseBase caseBase) {
+	public Retrieval(CBRCaseBase caseBase, CBRQuery userQuery) {
 		this.caseBase = caseBase;
+		query = userQuery;
+		queryArmy = (Army) userQuery.getDescription();
 	}
 
 	// This shit needs some unit testing LOL
@@ -70,5 +76,24 @@ public class Retrieval {
 			}
 		}
 		return lowestScore;
+	}
+	
+	public ArrayList<CBRCase> simpleStructuralSimilarity() {
+		ArrayList<CBRCase> retVal = new ArrayList<CBRCase>();
+		ArrayList<CBRCase> cases = (ArrayList<CBRCase>) caseBase.getCases();
+		
+		//Look for armies using the same warcaster as the query.
+		for(CBRCase currentCase : cases) {
+			Army currentArmy = ((Army) currentCase.getDescription());
+			//If names are equal, it's the same warcaster.
+			if(currentArmy.getWarcaster() != null && currentArmy.getWarcaster().getMiniatureName().equals(queryArmy.getWarcaster().getMiniatureName())) {
+				retVal.add(currentCase);
+			}
+		}
+		// No army in the case base has the same warcaster. -> compare battle group?
+		if(retVal.isEmpty()) {
+			
+		}
+		return retVal;
 	}
 }

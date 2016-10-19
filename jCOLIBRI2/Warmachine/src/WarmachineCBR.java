@@ -38,8 +38,11 @@ import jcolibri.method.retrieve.RetrievalResult;
 import jcolibri.method.retrieve.NNretrieval.NNConfig;
 import jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
+import jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
+import jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
 import jcolibri.method.retrieve.selection.SelectCases;
 import jcolibri.method.reuse.NumericDirectProportionMethod;
+import jcolibri.test.test2.TravelDescription;
 import jcolibri.util.FileIO;
 import models.Army;
 import models.Race;
@@ -104,7 +107,39 @@ public class WarmachineCBR implements StandardCBRApplication {
 	}
 
 	public void cycle(CBRQuery query) throws ExecutionException {
-		ArrayList<CBRCase> kBestCases = retrieveKBestCases();
+		ArrayList<CBRCase> kBestCases = retrieveKBestCases(query);
+		
+		//Add adaptation here!
+		
+		//Revision time -> Currently just select the version that you'd like to try out (lol)
+		System.out.println("There are " + kBestCases.size() + "similar cases: " + kBestCases + "\n Please choose the one you would like to try by entering its caseId");
+		System.out.print("The relevant IDs are: ");
+		for(CBRCase current : kBestCases) {
+			System.out.print(((Army)current.getDescription()).getCaseId() +" ");
+		}
+		System.out.println("\n");
+		
+		Scanner reader = new Scanner(System.in);
+		int chosenCaseId = reader.nextInt();
+		//Needed to consume \n
+		reader.nextLine();
+		
+		CBRCase chosenCase = null;
+		for(CBRCase current : kBestCases) {
+			Army army = (Army)current.getDescription();
+			if(army.getCaseId() == chosenCaseId) {
+				chosenCase = current;
+			}
+		}
+		
+		System.out.println("You chose the following army:" + chosenCase);
+
+		//Implement retention so the new army (currently the old one) is added to the database file!
+		
+		Retain.retainCase(chosenCase);
+
+		reader.close();
+		
 		
 	}
 
@@ -114,15 +149,19 @@ public class WarmachineCBR implements StandardCBRApplication {
 		TestDBServer.shutDown();
 	}
 	
-	private ArrayList<CBRCase> retrieveKBestCases() {
-		ArrayList<CBRCase> kBestCases = new ArrayList<CBRCase>();
+	private ArrayList<CBRCase> retrieveKBestCases(CBRQuery userQuery) {
 		// TODO More of this can be moved to Retrieval class
+		Retrieval retrievalHelper = new Retrieval(_caseBase, userQuery);
+		return retrievalHelper.simpleStructuralSimilarity();
+		/*
+		ArrayList<CBRCase> kBestCases = new ArrayList<CBRCase>();
 		System.out.println("Please enter the type of retrieval you want. 1 -> One list against one race. 2 -> One list against a subset of races. 3 -> One all-comers. 4 -> Two-list all comers");
 		Scanner reader = new Scanner(System.in);
 		int retrievalPriority = reader.nextInt();
 		//Needed to consume \n
 		reader.nextLine();
-		Retrieval retrievalHelper = new Retrieval(_caseBase);
+		kBestCases = retrievalHelper.simpleStructuralSimilarity();
+		System.out.println("Cases with same warcaster: " + kBestCases);
 		switch(retrievalPriority) {
 		case 1: {
 			// One list against one race
@@ -152,6 +191,7 @@ public class WarmachineCBR implements StandardCBRApplication {
 		}
 		reader.close();
 		return null;
+		*/
 	}
 
 	
@@ -163,6 +203,7 @@ public class WarmachineCBR implements StandardCBRApplication {
 			recommender.configure();
 			recommender.preCycle();
 			CBRQuery query = queryParser.parseQuery(1);
+			
 			System.out.println("-----------------QUERY: " + query);
 			recommender.cycle(query);
 			

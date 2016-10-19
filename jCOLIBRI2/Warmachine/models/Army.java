@@ -35,6 +35,10 @@ public class Army implements jcolibri.cbrcore.CaseComponent {
 		return retVal;
 	}
 	
+	public ArrayList<Miniature> getMiniatures() {
+		return miniatures;
+	}
+	
 	public int getTotalPointCost() {
 		return totalPointCost;
 	}
@@ -45,7 +49,8 @@ public class Army implements jcolibri.cbrcore.CaseComponent {
 	
 	public void addMiniature(Miniature miniature) {
 		miniatures.add(miniature);
-		if(miniature instanceof Warcaster) {
+		//So ugly, but who cAREAS
+		if(miniature instanceof Warcaster && !(miniature instanceof JuniorWarcaster)) {
 			totalPointCost -= ((Warcaster)miniature).getWarcasterPoints();
 		} else if(miniature != null){
 			totalPointCost += miniature.getPointCost();
@@ -63,6 +68,15 @@ public class Army implements jcolibri.cbrcore.CaseComponent {
 			}
 		}
 		//Should not get here -> Error Handling
+		return null;
+	}
+	
+	public Warcaster getWarcaster() {
+		for(Miniature miniature : miniatures) {
+			if(miniature instanceof Warcaster && !(miniature instanceof JuniorWarcaster)) {
+				return (Warcaster) miniature;
+			}
+		}
 		return null;
 	}
 

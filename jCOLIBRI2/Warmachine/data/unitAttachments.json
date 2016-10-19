@@ -1,0 +1,13 @@
+[
+{"miniatureId":50,"miniatureName":"atgm officer","miniatureType":5,"spd":6,"str":4,"mat":6,"rat":8,"def":14,"arm":11,"cmd":9,"fieldAllowance":2, "pointCost":4},
+{"miniatureId":51,"miniatureName":"murdoch","miniatureType":5,"spd":6,"str":6,"mat":7,"rat":6,"def":13,"arm":14,"cmd":9,"fieldAllowance":1, "pointCost":4},
+{"miniatureId":52,"miniatureName":"long gunner ua","miniatureType":5,"spd":6,"str":4,"mat":5,"rat":6,"def":12,"arm":12,"cmd":7,"fieldAllowance":1, "pointCost":4},
+{"miniatureId":53,"miniatureName":"precursor knights ua","miniatureType":5,"spd":6,"str":6,"mat":8,"rat":4,"def":13,"arm":14,"cmd":8,"fieldAllowance":2, "pointCost":4},
+{"miniatureId":54,"miniatureName":"stormblades ua","miniatureType":5,"spd":5,"str":6,"mat":8,"rat":6,"def":12,"arm":15,"cmd":8,"fieldAllowance":2, "pointCost":5},
+{"miniatureId":55,"miniatureName":"stormblades storm gunner","miniatureType":5,"spd":5,"str":6,"mat":7,"rat":5,"def":12,"arm":15,"cmd":8,"fieldAllowance":1000, "pointCost":2},
+{"miniatureId":56,"miniatureName":"sword knights ua","miniatureType":5,"spd":6,"str":6,"mat":7,"rat":4,"def":13,"arm":14,"cmd":8,"fieldAllowance":2, "pointCost":4},
+{"miniatureId":57,"miniatureName":"trenchers ua","miniatureType":5,"spd":6,"str":6,"mat":7,"rat":6,"def":13,"arm":13,"cmd":8,"fieldAllowance":1000, "pointCost":5},
+{"miniatureId":58,"miniatureName":"trenchers grenadier","miniatureType":5,"spd":6,"str":6,"mat":6,"rat":6,"def":13,"arm":13,"cmd":8,"fieldAllowance":1000, "pointCost":2},
+{"miniatureId":59,"miniatureName":"commandos scattergunner","miniatureType":5,"spd":6,"str":6,"mat":7,"rat":6,"def":13,"arm":13,"cmd":8,"fieldAllowance":1000, "pointCost":2},
+
+]
